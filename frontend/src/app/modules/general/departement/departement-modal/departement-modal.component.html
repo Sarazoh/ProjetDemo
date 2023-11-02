@@ -1,0 +1,22 @@
+
+<p-dialog [(visible)]="visible" (onShow)="onOuverture()" (onHide)="fermerModale()" [style]="{ width: '450px' }" header="Modification des informations" [modal]="true" styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <form [formGroup]="formDepartement">
+            <div class="field">
+                <label for="code">Code</label>
+                <input formControlName="code" type="text" pInputText id="code"/>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col">
+                    <label for="designation">Designation</label>
+                    <input formControlName="designation" type="text" pInputText id="designation" mode="currency" currency="USD" locale="en-US"/>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-button label="Valider" (click)="enregisterDepartement()" ></p-button>
+        <p-button label="Supprimer" ></p-button>
+    </ng-template>
+</p-dialog>

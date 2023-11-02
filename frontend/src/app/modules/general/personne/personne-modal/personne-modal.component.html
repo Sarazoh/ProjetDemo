@@ -1,0 +1,44 @@
+
+<script src="personne-modal.component.spec.ts"></script>
+<script src="../../service/departement.service.ts"></script>
+<script src="../../service/personne.service.ts"></script>
+<p-dialog [(visible)]="visible" (onShow)="onOuverture()" (onHide)="fermerModale()" [style]="{ width: '450px' }" header="Modification des informations" [modal]="true" styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <form [formGroup]="formPersonne">
+            <div class="field">
+                <label for="nom">Nom</label>
+                <input formControlName="nom" type="text" pInputText id="nom"/>
+            </div>
+            <div class="formgrid grid">
+                <div class="field col">
+                    <label for="prenoms">Prénoms </label>
+                    <input formControlName="prenoms" type="text" pInputText id="prenoms" mode="currency" currency="USD" locale="en-US"/>
+                </div>
+                <div class="field col">
+                    <label for="age">Age </label>
+                    <input formControlName="age" type="text" pInputText id="age"/>
+                </div>
+                <div class="field col">
+                    <label for="login">Login</label>
+                    <input formControlName="login" type="text" pInputText id="login"/>
+                </div>
+
+              <div class="field col">
+              <label >Departement</label>
+          <p-autoComplete formControlName="departement" appendTo="body" field="designation" [suggestions]="suggestions" (completeMethod)="search($event)">
+          </p-autoComplete>
+              </div>
+            </div>
+
+        </form>
+
+
+
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-button label="Valider" (click)="enregisterPersonne()" ></p-button>
+        <p-button label="Supprimer" ></p-button>
+    </ng-template>
+</p-dialog>

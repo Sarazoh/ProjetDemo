@@ -1,0 +1,47 @@
+<p-table [value]="personnes" selectionMode="single"  [(selection)]="personneSelectionne" [scrollable]="true" scrollHeight="400px" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="nom" style="width:20%" >Nom  <p-sortIcon field="nom"></p-sortIcon></th>
+            <th>Prénoms</th>
+            <th style="min-width:10rem">Âge
+              <p-columnFilter
+                type="text" field="age"
+                display="menu">
+              </p-columnFilter>
+            </th>
+            <th>Login</th>
+            <th>Designation</th>
+            <th>Action</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-personne>
+        <tr [pSelectableRow]="personne">
+            <td>{{personne?.nom}}</td>
+            <td>{{personne?.prenoms}}</td>
+            <td>{{personne?.age}}</td>
+            <td>{{personne?.login}}</td>
+            <td>{{personne?.departement?.designation}}</td>
+            <td>
+                <button class="btn btn-link" (click)="openWindow(personne)">
+                    <i class="pi pi-fw pi-pencil"></i>
+                </button>
+              <button class="btn btn-link" (click)="personneSpprime(personne)">
+                <i class="pi pi-trash"></i>
+              </button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div style="text-align:right">
+            <p-button icon="pi pi-plus-circle" label="Ajouter" (click)="openWindow()"></p-button>
+            <p-button icon="pi pi-pencil" label="Modifier" (click)="openWindow(personneSelectionne)"  [disabled]="!personneSelectionne"> </p-button>
+            <p-button icon="pi pi-trash" label="Supprimer" (click)="personneSpprime(personneSelectionne)" [disabled]="!personneSelectionne"></p-button>
+        </div>
+    </ng-template>
+</p-table>
+<app-personne-modal [(visible)]="editionPersonne"
+                    [idPersonne]="idPersonne"
+                    (personneModifie)="onPersonneModifiee()">
+</app-personne-modal>
+
+

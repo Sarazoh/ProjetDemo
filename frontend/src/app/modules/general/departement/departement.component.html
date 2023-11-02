@@ -1,0 +1,44 @@
+<script src="../personne/personne-modal/personne-modal.component.ts"></script>
+<p-table [value]="departements" selectionMode="single" [(selection)]="departementSelectionne" [scrollable]="true" scrollHeight="400px" [tableStyle]="{'min-width': '50rem'}">
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Code</th>
+      <th>Designation</th>
+      <th>Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-departement align="center">
+    <tr [pSelectableRow]="departement">
+      <td>{{departement?.code}}</td>
+      <td>{{departement?.designation}}</td>
+      <td>
+        <button class="btn btn-link" (click)="ouvreFenetre(departement)">
+          <i class="pi pi-fw pi-pencil"></i>
+        </button>
+        <button class="btn btn-link"  >
+          <i class="pi pi-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div style="text-align:right">
+      <p-button icon="pi pi-plus-circle" label="Ajouter" (click)="ouvreFenetre()"></p-button>
+
+      <p-button icon="pi pi-pencil" label="Modifier" (click)="ouvreFenetre(departementSelectionne)"[disabled]="!departementSelectionne"></p-button>
+
+      <p-button icon="pi pi-trash" label="Supprimer" (click)="departementSpprime(departementSelectionne)" [disabled]="!departementSelectionne"></p-button>
+
+    </div>
+  </ng-template>
+</p-table>
+<app-departement-modal [(visible)]="editionDepartement"
+                    [idDepartement]="idDepartement"
+                    (departementModifie)="departementModifie()">
+
+</app-departement-modal>
+
+
+
+
